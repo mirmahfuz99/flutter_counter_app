@@ -1,17 +1,18 @@
 import 'dart:async';
 import 'dart:collection';
 import 'package:flutter_counter_app/bloc_provider.dart';
+import 'package:rxdart/rxdart.dart';
 
 class IncrementBloc implements BlocBase {
 
   int _counter;
-  StreamController<int> _counterController = StreamController<int>();
-  StreamSink<int> get _inAdd => _counterController.sink;
+  BehaviorSubject<int> _counterController = BehaviorSubject<int>();
+  Sink<int> get _inAdd => _counterController.sink;
   Stream<int> get outCounter => _counterController.stream;
 
 
-  StreamController _actionController = StreamController();
-  StreamSink get incrementCounter => _actionController.sink;
+  BehaviorSubject _actionController = BehaviorSubject();
+  Sink get incrementCounter => _actionController.sink;
 
 
   IncrementBloc(){
